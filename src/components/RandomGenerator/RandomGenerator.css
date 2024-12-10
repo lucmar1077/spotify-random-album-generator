@@ -1,0 +1,56 @@
+.random-generator {
+    display: flex;
+}
+
+.random-generator-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.album-display {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1em;
+}
+
+.album-cover {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    height: var(--album-cover-height);
+    width: var(--album-cover-width);
+}
+
+.album-info {
+    max-width: var(--album-display-width);
+}
+
+.album-title, .album-artist, .album-genres, .album-runtime {
+    color: var(--white);
+    font-size: var(--font-big);
+    margin-top: 0.5em;
+    margin-left: 0.5em;
+}
+
+a {
+    text-decoration: none;
+}
+
+.album-title {
+    color: var(--spotify-green);
+}
+
+.album-genres, .album-runtime {
+    color: var(--gray);
+}
+
+.album-title span, .album-artist span, .album-genres span, .album-runtime span {
+    color: var(--gray);
+    font-size: var(--font-small);
+    margin: 0.5em;
+}
+
+.generate-album-button {
+    margin: 0 1em;
+}

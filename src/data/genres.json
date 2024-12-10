@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Electronica"
+  },
+  {
+    "id": 2,
+    "name": "Glitch"
+  },
+  {
+    "id": 3,
+    "name": "Indietronica"
+  },
+  {
+    "id": 4,
+    "name": "Melancholia"
+  },
+  {
+    "id": 5,
+    "name": "J-rock"
+  },
+  {
+    "id": 6,
+    "name": "Madchester"
+  },
+  {
+    "id": 7,
+    "name": "Melancholia"
+  },
+  {
+    "id": 8,
+    "name": "Permanent Wave"
+  },
+  {
+    "id": 9,
+    "name": "Shibuya-kei"
+  },
+  {
+    "id": 10,
+    "name": "Shoegaze"
+  }
+]

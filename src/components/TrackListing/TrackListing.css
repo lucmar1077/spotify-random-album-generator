@@ -1,0 +1,48 @@
+.track-listing-container {
+    border: var(--border);
+    border-radius: var(--border-radius);
+    margin: 1em;
+    max-height: var(--track-listing-height);
+    width: calc(100% - 2em);
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.track-container {
+    border-radius: var(--border-radius);
+    display: flex;
+    font-size: var(--font-small);
+    justify-content: space-between;
+    margin: 0 1em;
+    padding: 0.5em 0;
+}
+
+.track-container:first-child {
+    margin-top: 1em;
+}
+
+.track-container:last-child {
+    margin-bottom: 1em;
+}
+
+.track-container:nth-child(2n + 1) {
+    background-color: #0e0e0e;
+}
+
+.track {
+    color: var(--white);
+    cursor: pointer;
+}
+
+.track span, .track-length {
+    color: var(--gray);
+}
+
+.track span {
+    margin: 0 1em;
+}
+
+.track-length {
+    margin-right: 1em;
+
+}

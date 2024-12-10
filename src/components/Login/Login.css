@@ -1,0 +1,28 @@
+.login-container {
+    align-items: center;
+    color: #fbfbfe;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    width: 100%;
+}
+
+.login-container h1, .login-container p, .login-container ul {
+    max-width: 500px;
+    margin-bottom: 1em;
+}
+
+.login-container li {
+    max-width: 280px;
+}
+
+.login-container span {
+    font-weight: 700;
+}
+
+.connect-spotify-button {
+    padding: 0.5em 1em;
+    border-radius: 2em;
+    font-weight: 700;
+}
