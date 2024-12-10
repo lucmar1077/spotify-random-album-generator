@@ -32,6 +32,11 @@
 .track {
     color: var(--white);
     cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.track:hover {
+    color: var(--gray);
 }
 
 .track span, .track-length {

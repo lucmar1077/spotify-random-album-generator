@@ -13,6 +13,7 @@ export default function RandomGenerator() {
     const [albumReleaseDate, setAlbumReleaseDate] = useState('');
     const [albumRuntime, setAlbumRuntime] = useState('');
     const [albumUrl, setAlbumUrl] = useState('');
+    const [artistUrl, setArtistUrl] = useState('');
 
     // tracklisting.jsx
     const [trackList, setTrackList] = useState([])
@@ -54,56 +55,68 @@ export default function RandomGenerator() {
     };
 
     const getRandomAlbumId = async () => {
-        const genre = filters.genre || getRandomGenre();
-        const decade = filters.decade || "";
-        const market = filters.market || "US";
-
-        // example search query: "f genre:Rock" or "a genre:Melancholia year:1990-1999"
-        const searchQuery = decade
-            ? `${getRandomLetter()} genre:${genre} year:${decade}`
-            : `${getRandomLetter()} genre:${genre}`;
-
-        const searchParams = {
-            q: searchQuery,
-            type: 'track',
-            market: market,
-            limit: 1,
-            offset: Math.floor(Math.random() * 200),
-        };
-
-        const response = await axios.get(`https://api.spotify.com/v1/search`, {
+        try {
+            const genre = filters.genre || getRandomGenre();
+            const decade = filters.decade || "";
+            const market = filters.market || "US";
+    
+            // Example search query: "f genre:Rock" or "a genre:Melancholia year:1990-1999"
+            const searchQuery = decade
+                ? `${getRandomLetter()} genre:${genre} year:${decade}`
+                : `${getRandomLetter()} genre:${genre}`;
+    
+            const searchParams = {
+                q: searchQuery,
+                type: 'track',
+                market: market,
+                limit: 1,
+                offset: Math.floor(Math.random() * 200),
+            };
+    
+            const response = await axios.get(`https://api.spotify.com/v1/search`, {
                 params: searchParams,
-                headers: { Authorization: `Bearer ${token}`},
-        });
-
-        const track = response.data.tracks?.items[0];
-        return track?.album?.id || null;
+                headers: { Authorization: `Bearer ${token}` },
+            });
+    
+            const track = response.data.tracks?.items[0];
+            return track?.album?.id || null;
+        } catch (error) {
+            console.error("Error in getRandomAlbumId:", error);
+            return null; 
+        }
     };
 
     const getAlbumFromId = async (albumId) => {
-        if (!albumId) return null;
-        const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
-            headers: { Authorization: `Bearer ${token}`},
-        });
-        return response.data;
+        try {
+            if (!albumId) return null;
+            const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}`, {
+                headers: { Authorization: `Bearer ${token}` },
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error in getAlbumFromId:", error);
+            return null;
+        }
     };
 
-    // don't forget to add check for "Various Artists" and "Covers Culture"
     const loadAlbumDetails = async () => {
         const albumId = await getRandomAlbumId();
         const albumData = await getAlbumFromId(albumId);
+
         if (!albumData) {
+            console.warn("Album data not found");
             return;
-        }
+        };
 
         const artistName = albumData.artists[0]?.name;
         if (artistName === "Various Artists" || artistName === "Covers Culture") {
             return;
-        }
+        };
 
         setTrackList(albumData.tracks.items);
         setAlbumCover(albumData.images[0].url);
         setAlbumUrl(albumData.external_urls.spotify);
+        setArtistUrl(albumData.artists[0].external_urls.spotify);
         setAlbumName(albumData.name);
         setArtistName(albumData.artists[0].name);
         setAlbumReleaseDate(albumData.release_date);
@@ -130,7 +143,9 @@ export default function RandomGenerator() {
                         <a href={albumUrl} target="_blank">
                             <div className="album-title"><span>album</span>{albumName}</div>
                         </a>
-                        <div className="album-artist"><span>artist</span>{artistName}</div>
+                        <a href={artistUrl} target="_blank">
+                            <div className="album-artist"><span>artist</span>{artistName}</div>
+                        </a>
                         <div className="album-genres"><span>date</span>{albumReleaseDate}</div>
                         <div className="album-runtime"><span>runtime</span>{albumRuntime}</div>
                     </div>

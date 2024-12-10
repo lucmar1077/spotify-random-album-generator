@@ -20,6 +20,11 @@
     border-radius: var(--border-radius);
     height: var(--album-cover-height);
     width: var(--album-cover-width);
+    transition: filter 0.3s ease;
+}
+
+.album-cover:hover {
+    filter: brightness(0.75);
 }
 
 .album-info {
@@ -37,8 +42,22 @@ a {
     text-decoration: none;
 }
 
+.album-artist {
+    color: var(--white);
+    transition: color 0.2s ease;
+}
+
+.album-artist:hover {
+    color: var(--gray);
+}
+
 .album-title {
     color: var(--spotify-green);
+    transition: color 0.2s ease;
+}
+
+.album-title:hover {
+    color: rgba(30, 215, 95, 0.537);
 }
 
 .album-genres, .album-runtime {
